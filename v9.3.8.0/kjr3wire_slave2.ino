@@ -34,22 +34,23 @@
  * SOFTWARE.
  *
  */
-  //COM15 UNO
+
   #include <avr/wdt.h>
   #include <avr/boot.h>
-  #define SIGNAL_LINE 6 //3
-  #define MASTER_LINE 7 //4
-  #define SLAVE_LINE  8 //5
+  #define SIGNAL_LINE 6 //6
+  #define MASTER_LINE 7 //7
+  #define SLAVE_LINE  8 //8
   #define LINE_ID '2'
-
+  #define SERIAL_SIZE 300
+  
   const char * analog_input_data;
   const char * digital_input_data;
   const char * health_data;
  
 
-  char concatenated_chars[300]; //190
-  char cached_str[217];
-  char id_char_arr[70];
+  char concatenated_chars[SERIAL_SIZE]; //
+  char cached_str[SERIAL_SIZE];
+  char id_char_arr[64]; //serial number
 
 
   bool init_t = true; // first statement get executed only once
@@ -133,7 +134,7 @@
   {
     //wdt_reset();
     //********************************************************************
-    char od_pins_slave[75];
+    char od_pins_slave[70];
     //********************************************************************
 
 
@@ -158,14 +159,13 @@
           digital_input_data = "0000000000000000000000000000000000000000000000000000000000000000000000"; //70 pins (input digital)          
           health_data = "200.50,212.89"; // temperature and humidity
           //chars 190 max
-          sprintf(concatenated_chars,"%c,%s,%s,%s,%s", LINE_ID, health_data, digital_input_data, od_pins_slave, analog_input_data);
+          sprintf(concatenated_chars,"%c,%s,%s,%s,%s,", LINE_ID, health_data, digital_input_data, od_pins_slave, analog_input_data);
           encode_lapse(concatenated_chars , SLAVE_LINE);
-
           //wdt_reset();
           itsforme = false;
         }//init
           //Serial.print("concatenated_chars: ");
-          //Serial.println(concatenated_chars);
+          //Serial.println(concatenated_chars);        
       }//itsforme
     }//if
     //********************************************************************
@@ -248,7 +248,7 @@
       //************************************************************
       //EXTRACT OUTPUT DIGITAL STRING FROM PinStat STRING
       unsigned int i = 74, xx = 0;
-
+      
       while(cached_str[i] != ','){
         od_pins_slave[xx] = cached_str[i];
         xx++;
@@ -257,8 +257,7 @@
         od_pins_slave[xx] = '\0';
       //************************************************************
       //sample code
-      //digitalWrite(42, od_pins_slave[42]=='0'?false:true);
-      digitalWrite(42, 1);
+      digitalWrite(42, od_pins_slave[42]=='0'?false:true);
 
 
       Serial.print(F("serial_data_rcvd_from_master: "));

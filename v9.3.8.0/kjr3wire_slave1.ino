@@ -34,22 +34,23 @@
  * SOFTWARE.
  *
  */
-  //COM16 MEGA
+
   #include <avr/wdt.h>
   #include <avr/boot.h>
-  #define SIGNAL_LINE 3 //3
-  #define MASTER_LINE 4 //4
-  #define SLAVE_LINE  5 //5
+  #define SIGNAL_LINE 3 //6
+  #define MASTER_LINE 4 //7
+  #define SLAVE_LINE  5 //8
   #define LINE_ID '1'
-
+  #define SERIAL_SIZE 300
+  
   const char * analog_input_data;
   const char * digital_input_data;
   const char * health_data;
  
 
-  char concatenated_chars[300]; //190
-  char cached_str[217];
-  char id_char_arr[70];
+  char concatenated_chars[SERIAL_SIZE]; //
+  char cached_str[SERIAL_SIZE];
+  char id_char_arr[64]; //serial number
 
 
   bool init_t = true; // first statement get executed only once
@@ -70,7 +71,7 @@
   //********************************************************************
     //wdt_enable(WDTO_8S);
   //********************************************************************
-
+  
   //********************************************************************
     Serial.begin(9600);
     //Serial.begin(115200);
@@ -133,7 +134,7 @@
   {
     //wdt_reset();
     //********************************************************************
-    char od_pins_slave[75];
+    char od_pins_slave[70];
     //********************************************************************
 
 
@@ -158,7 +159,7 @@
           digital_input_data = "0000000000000000000000000000000000000000000000000000000000000000000000"; //70 pins (input digital)          
           health_data = "200.50,212.89"; // temperature and humidity
           //chars 190 max
-          sprintf(concatenated_chars,"%c,%s,%s,%s,%s", LINE_ID, health_data, digital_input_data, od_pins_slave, analog_input_data);
+          sprintf(concatenated_chars,"%c,%s,%s,%s,%s,", LINE_ID, health_data, digital_input_data, od_pins_slave, analog_input_data);
           encode_lapse(concatenated_chars , SLAVE_LINE);
           //wdt_reset();
           itsforme = false;
@@ -247,7 +248,7 @@
       //************************************************************
       //EXTRACT OUTPUT DIGITAL STRING FROM PinStat STRING
       unsigned int i = 74, xx = 0;
-
+      
       while(cached_str[i] != ','){
         od_pins_slave[xx] = cached_str[i];
         xx++;
