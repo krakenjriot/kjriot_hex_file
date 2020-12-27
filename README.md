@@ -17,6 +17,7 @@ see below link
 https://github.com/krakenjriot/KJR_3-Wire_Protocol_v1.02
 
 
+<pre>
 KJR PIN ASSIGNMENTS - MEGA BOARD (MASTER)
 
 D0 RX
@@ -88,3 +89,4 @@ D66/A12 FREE
 D67/A13 FREE
 D68/A14 FREE
 D69/A15 FREE
+</pre>
