@@ -2,7 +2,7 @@
 
 - kjr3wire_master = hex file for master
 - mega = for Arduino Mega
-- v5 = version 9.3.8
+- v5 = version 5.0
 - dht22p5 = dht22 sensor model / connected to pin 5
 - sig6 = signal line at pin 6
 - mas7 = master line at pin 7
