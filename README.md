@@ -1,4 +1,4 @@
-**Filename Code Interpretations = kjr3wire_master_mega_bl8_dht11p5_sig6_mas7_sla8.hex
+***Filename Code Interpretations = kjr3wire_master_mega_bl8_dht11p5_sig6_mas7_sla8.hex
 
 - kjr3wire_master = hex file for master
 - mega = for Arduino Mega
