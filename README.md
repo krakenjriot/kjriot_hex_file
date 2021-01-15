@@ -1,9 +1,9 @@
-**Filename Code Interpretations = kjr3wire_master_mega_v5_dht22p5_sig6_mas7_sla8.hex
+**Filename Code Interpretations = kjr3wire_master_mega_bl8_dht11p5_sig6_mas7_sla8.hex
 
 - kjr3wire_master = hex file for master
 - mega = for Arduino Mega
-- v5 = version 5.0
-- dht22p5 = dht22 sensor model / connected to pin 5
+- bl8 (version name bl = "buteteng laot") / version 8
+- dht11p5 = dht22 sensor model / connected to pin 5
 - sig6 = signal line at pin 6
 - mas7 = master line at pin 7
 - sla8 = slave line at pin 8
